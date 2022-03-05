@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import tick from "./img/iconmonstr-check-mark-1.svg";
+import useSearchResults from "../hooks/SearchResultsHook";
 
 const StyledTableContainer = styled.div`
   width: 100%;
@@ -38,6 +39,8 @@ const Tick = styled.div`
 `;
 
 export const SearchResultsTable: React.FC = () => {
+  const { searchResults, propertyType } = useSearchResults();
+
   return (
     <StyledTableContainer>
       <StyledTable>
