@@ -18,5 +18,5 @@
     "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
-  "rules": {"indent": ["error", 2]}
+  "rules": {"indent": ["error", 2], "no-debugger": "warn", "no-console": "warn"}
 }
