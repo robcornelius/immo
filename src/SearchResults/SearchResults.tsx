@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { SearchResultsTable } from "../tables/table";
+import { SearchResultsTable } from "../tables/SearchResultsTable";
 
 const SearchResultsWrapper = styled.section`
   margin-top: 30px;

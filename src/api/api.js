@@ -132,12 +132,9 @@ async function fetchProperties({ address, propertyType }) {
       (property) => property.propertyType === propertyType
     );
   }
-  debugger;
   const propertiesFilteredByAddress = propertiesFilteredByType.filter(
     (property) => property.address.toLowerCase().includes(address.toLowerCase())
   );
-  debugger;
-
   return {
     properties: propertiesFilteredByAddress.map(
       ({ id, address, postcode, propertyType }) => ({
