@@ -3,10 +3,12 @@ import React, { createContext, useState, ReactNode } from "react";
 type PropertyDetailProps = { children: ReactNode };
 
 type propertyDetailsType = {
-  address: string;
-  postcode: string;
-  numberOfRooms: number;
-  floorArea: number;
+  property: {
+    address: string;
+    postcode: string;
+    numberOfRooms: number;
+    floorArea: number;
+  };
 };
 
 interface IPropertyTypeProps {

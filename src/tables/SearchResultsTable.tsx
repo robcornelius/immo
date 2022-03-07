@@ -37,6 +37,8 @@ export const SearchResultsTable: React.FC = () => {
   const { propertyDetails, setPropertyDetails, searchResults } =
     useSearchResults();
   const [promiseArray, setPromiseArray] = useState<any>([]);
+  const [searchResultsDetails, setSearchResultsDetails] = useState<any>([]);
+
   const handleGetMoreDetails = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -69,6 +71,11 @@ export const SearchResultsTable: React.FC = () => {
         );
       });
   }, [promiseArray]);
+
+  useEffect(() => {
+    setSearchResultsDetails(searchResults);
+  }, [searchResults]);
+
   return (
     <>
       <StyledTableContainer>
@@ -106,23 +113,29 @@ export const SearchResultsTable: React.FC = () => {
               <th>Address</th>
               <th>Postcode</th>
               <th>Property Type</th>
+              <th>Number of Rooms</th>
+              <th>
+                Floor Area m<sup>2</sup>
+              </th>
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(searchResults) &&
-              searchResults.map((address, i) => {
+            {searchResultsDetails.length > 0 &&
+              searchResultsDetails.map((dets: any, i: number) => {
                 return (
                   <tr key={i}>
                     <td>
                       <input
                         type="checkbox"
-                        value={address.id}
+                        value={dets.property.id}
                         onChange={handleGetMoreDetails}
                       />
                     </td>
-                    <td>{address.address}</td>
-                    <td>{address.postcode}</td>
-                    <td>{address.propertyType}</td>
+                    <td>{dets.property.address}</td>
+                    <td>{dets.property.postcode}</td>
+                    <td>{dets.property.propertyType}</td>
+                    <td>{dets.property.numberOfRooms}</td>
+                    <td>{dets.property.floorArea}</td>
                   </tr>
                 );
               })}

@@ -3,13 +3,13 @@ import React, { createContext, useState, ReactNode } from "react";
 type PropertyTypeProps = { children: ReactNode };
 
 type addressType = {
-  address: string;
-  postcode: string;
-  propertyType: string;
-  id: string;
-};
-type SearchResultsType = {
-  address: addressType[];
+  property: {
+    address: string;
+    postcode: string;
+    numberOfRooms: number;
+    floorArea: number;
+    id: string;
+  };
 };
 
 export type PropertyTypesType = {
@@ -28,7 +28,7 @@ type propertyDetailsType = {
   };
 };
 interface IPropertyTypeProps {
-  searchResults: SearchResultsType;
+  searchResults: addressType;
   setSearchResults: (value: any) => void;
   propertyType: any;
   setPropertyType: (value: any) => void;
@@ -39,7 +39,9 @@ interface IPropertyTypeProps {
 export const SearchResultsContext = createContext({} as IPropertyTypeProps);
 
 const SeaarchResultProvider = ({ children }: PropertyTypeProps) => {
-  const [searchResults, setSearchResults] = useState({} as SearchResultsType);
+  const [searchResults, setSearchResults] = useState<addressType>(
+    {} as addressType
+  );
   const [propertyType, setPropertyType] = useState(undefined);
   const [propertyDetails, setPropertyDetails] = useState(
     [] as propertyDetailsType[]

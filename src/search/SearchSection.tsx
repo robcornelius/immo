@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { message } from "antd";
 import styled from "styled-components";
-import { fetchProperties } from "../api/api";
+import { fetchProperties, fetchPropertyDetails } from "../api/api";
 import useSearchResults from "../hooks/SearchResultsHook";
 
 const SearchButton = styled.button`
@@ -21,7 +20,7 @@ const SearchBox = styled.input`
 const SearchSectionWrapper = styled.section`
   margin-top: 20px;
 `;
-
+const extrasArray: any[] = [];
 const SearchSection: React.FC = () => {
   const [searchString, setSearchString] = useState<string>("");
   const { propertyType, setSearchResults } = useSearchResults();
@@ -29,20 +28,14 @@ const SearchSection: React.FC = () => {
     setSearchString(e.currentTarget.value);
   };
 
-  const doSearch = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation;
+  const doSearch = async () => {
     const address = searchString;
-    const results = await fetchProperties({ address, propertyType }).catch(
-      (error) => {
-        console.error(error);
-        message.info(
-          "Something eldritch has eaten your request. Pray that it does not eat you"
-        );
-      }
-    );
-    setSearchResults(results?.properties);
+    const results = await fetchProperties({ address, propertyType });
+    for (let x = 0; x < results?.properties.length; x++) {
+      extrasArray.push(await fetchPropertyDetails(results.properties[x].id));
+    }
+    setSearchResults(extrasArray);
   };
-
   return (
     <SearchSectionWrapper>
       <SearchBox onChange={handleChange} />
