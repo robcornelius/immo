@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { message } from "antd";
 import styled from "styled-components";
 import useSearchResults from "../hooks/SearchResultsHook";
 import { fetchPropertyDetails } from "../api/api";
@@ -59,10 +60,14 @@ export const SearchResultsTable: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("promiseArray", promiseArray);
     Promise.allSettled(promiseArray)
       .then((res) => setPropertyDetails(res))
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        message.info(
+          "Something eldritch has eaten your request. Pray that it does not eat you"
+        );
+      });
   }, [promiseArray]);
   return (
     <>

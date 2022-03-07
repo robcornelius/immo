@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { message } from "antd";
 import styled from "styled-components";
 import { fetchProperties } from "../api/api";
 import useSearchResults from "../hooks/SearchResultsHook";
@@ -32,7 +33,12 @@ const SearchSection: React.FC = () => {
     e.stopPropagation;
     const address = searchString;
     const results = await fetchProperties({ address, propertyType }).catch(
-      (error) => console.error(error)
+      (error) => {
+        console.error(error);
+        message.info(
+          "Something eldritch has eaten your request. Pray that it does not eat you"
+        );
+      }
     );
     setSearchResults(results?.properties);
   };

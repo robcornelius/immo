@@ -7,6 +7,7 @@ import SearchSection from "./search/SearchSection";
 import SearchResults from "./SearchResults/SearchResults";
 import SeaarchResultProvider from "./contexts/propertyType";
 import PropertyDetailsProvider from "./contexts/propertyDetails";
+import "antd/dist/antd.css";
 function App() {
   return (
     <SeaarchResultProvider>
